@@ -169,6 +169,7 @@ return {
     local servers = {
       -- clangd = {},
       -- gopls = {},
+      texlab = {},
       pyright = {
         settings = {
           pyright = {
