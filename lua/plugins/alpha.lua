@@ -28,11 +28,14 @@ return {
     }
 
     -- Buttons
+    local vimrc = os.getenv 'MYVIMRC'
+    local config_directory = string.gsub(vimrc, 'init.lua', '')
+
     dashboard.section.buttons.val = {
       dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
       dashboard.button('f', '  Search files', ':Telescope find_files <CR>'),
       dashboard.button('h', '  Search help', ':Telescope help_tags <CR>'),
-      dashboard.button('c', '  Configuration', ':e $MYVIMRC<CR>'),
+      dashboard.button('c', '  Configuration', ':e ' .. config_directory .. '<CR>'),
       dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
     }
 
