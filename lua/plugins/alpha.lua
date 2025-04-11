@@ -6,7 +6,6 @@ return {
 
   config = function()
     local alpha = require 'alpha'
-    -- local dashboard = require 'alpha.themes.startify'
     local dashboard = require 'alpha.themes.dashboard'
 
     dashboard.section.header.val = {
@@ -27,15 +26,22 @@ return {
       [[                                                                       ]],
     }
 
-    -- Buttons
+    -- Set current working dir to config root:
     local vimrc = os.getenv 'MYVIMRC'
     local config_directory = string.gsub(vimrc, 'init.lua', '')
+
+    local function switch_and_open_config()
+      vim.api.nvim_set_current_dir(config_directory)
+      vim.api.nvim_command('edit ' .. vim.fn.expand '$MYVIMRC')
+    end
+
+    -- Buttons
 
     dashboard.section.buttons.val = {
       dashboard.button('e', '  New file', ':ene <BAR> startinsert <CR>'),
       dashboard.button('f', '  Search files', ':Telescope find_files <CR>'),
       dashboard.button('h', '  Search help', ':Telescope help_tags <CR>'),
-      dashboard.button('c', '  Configuration', ':e ' .. config_directory .. '<CR>'),
+      dashboard.button('c', '  Configuration', switch_and_open_config),
       dashboard.button('q', '  Quit Neovim', ':qa<CR>'),
     }
 
