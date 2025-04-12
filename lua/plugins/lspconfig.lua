@@ -148,14 +148,20 @@ return {
             expr = 'import <nixpkgs> { }',
           },
           formatting = {
-            command = { 'nixfmt' },
+            command = { 'alejandra' },
           },
           options = {
             nixos = {
-              expr = '(builtins.getFlake ("git+file://" + toString ./.)).nixosConfigurations.nixos.options',
+              expr = '(builtins.getFlake "/home/simon/nixdots").nixosConfigurations.nixos.options',
             },
-            home_manager = {
-              expr = '(builtins.getFlake ("git+file://" + toString ./.)).homeConfigurations."simon@nixos".options',
+            home_desktop = {
+              expr = '(builtins.getFlake "/home/simon/nixdots").homeConfigurations."simon".options',
+            },
+            home_mac = {
+              expr = '(builtins.getFlake "/home/simon/nixdots").homeConfigurations."simon@mac".options',
+            },
+            darwin = {
+              expr = '(builtins.getFlake "/home/simon/nixdots").darwinConfigurations."mac".options',
             },
           },
         },
