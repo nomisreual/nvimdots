@@ -26,13 +26,9 @@ return {
       [[                                                                       ]],
     }
 
-    -- Set current working dir to config root:
-    local vimrc = os.getenv 'MYVIMRC'
-    local config_directory = string.gsub(vimrc, 'init.lua', '')
-
     local function switch_and_open_config()
-      vim.api.nvim_set_current_dir(config_directory)
-      vim.api.nvim_command('edit ' .. vim.fn.expand '$MYVIMRC')
+      vim.api.nvim_set_current_dir(vim.fn.stdpath 'config')
+      vim.api.nvim_command('edit ' .. vim.fn.stdpath 'config')
     end
 
     -- Buttons
